@@ -28,11 +28,28 @@ func QuickSort(intList []int) {
 }
 
 //QuickSort1 .
-func QuickSort1(arr []int) []int {
+func QuickSort1(arr []int) {
 	if len(arr) <= 1 {
-		return arr
+		return
 	}
-	return arr
+	flag := arr[0]
+	l, r := 0, len(arr)-1
+	for l < r {
+		for arr[r] > flag {
+			r--
+		}
+		if arr[r] < flag {
+			arr[r], arr[l] = arr[l], arr[r]
+		}
+		for arr[l] < flag {
+			l++
+		}
+		if arr[l] > flag {
+			arr[l], arr[r] = arr[r], arr[l]
+		}
+	}
+	QuickSort(arr[:l])
+	QuickSort(arr[l+1:])
 }
 
 //BubbleSort .
