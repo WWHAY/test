@@ -24,7 +24,6 @@ func QuickSort(intList []int) {
 	// 递归
 	QuickSort(intList[:left])
 	QuickSort(intList[left+1:])
-
 }
 
 //QuickSort1 .
