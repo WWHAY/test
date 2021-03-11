@@ -13,18 +13,15 @@ func removeDuplicates(S string) string {
 }
 
 func calculate(s string) int {
-	if len(s) == 0 {
-		return 0
-	}
-	num := 0
+	stack := []int{}
 	preSign := '+'
-	var stack []int
-	for v := range s {
-		isDigit := '0' <= v && v <= '9'
+	num := 0
+	for i, ch := range s {
+		isDigit := '0' <= ch && ch <= '9'
 		if isDigit {
-			num = num*10 + int(v)
+			num = num*10 + int(ch-'0')
 		}
-		if !isDigit && v != ' ' {
+		if !isDigit && ch != ' ' || i == len(s)-1 {
 			switch preSign {
 			case '+':
 				stack = append(stack, num)
@@ -32,18 +29,16 @@ func calculate(s string) int {
 				stack = append(stack, -num)
 			case '*':
 				stack[len(stack)-1] *= num
-			case '/':
+			default:
 				stack[len(stack)-1] /= num
 			}
+			preSign = ch
 			num = 0
-
 		}
-
 	}
-
-	res := 0
-	for v := range stack {
-		res += v
+	var ans int
+	for _, v := range stack {
+		ans += v
 	}
-	return res
+	return ans
 }
