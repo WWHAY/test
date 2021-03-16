@@ -2,6 +2,13 @@ package offer
 
 import "fmt"
 
+//TreeNode .
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func verifyPostorder(postorder []int) bool {
 	if len(postorder) <= 1 {
 		return true
@@ -26,3 +33,19 @@ func verifyPostorder(postorder []int) bool {
 	}
 	return verifyPostorder(postorder[:r]) && verifyPostorder(postorder[r:len(postorder)-1])
 }
+
+func levelOrder(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	var result []int
+	if root.Left != nil {
+		result = append(result, root.Left.Val)
+	}
+	if root.Right != nil {
+		result = append(result, root.Right.Val)
+	}
+	return result
+}
+
+func get(root *TreeNode)
